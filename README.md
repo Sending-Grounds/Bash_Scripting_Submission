@@ -21,6 +21,6 @@ I will gift someone the book I was recommending **"The UNIX Programming Environm
 # Create your script
 script="<your_script_name_here>"
 chmod 0750 ${script}
-git commit .
+git add .
 git commit -m 'SUBMISSION: My submission to the bash scripting challenge'
 ```
