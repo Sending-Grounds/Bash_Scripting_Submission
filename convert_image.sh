@@ -85,6 +85,7 @@ main() {
 
     # Check at least one image is provided
     if [ -z "$@" ]; then
+        echo "Error: at least one image must be provided."
         usage
         exit $EXIT_INVALID_ARGS
     fi
