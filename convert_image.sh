@@ -44,10 +44,10 @@ EOF
 }
 
 setup() {
-    type pnmnlfilt 1>/dev/null
-    if [ -z "$?" ]; then
-        echo "Script is dependent on netpbmi utilities"
-        echo "Install it with your package manager"
+    type pnmnlfilt 1>/dev/null 2>&1
+    if [ -n "$?" ]; then
+        echo "Error: Script is dependent on netpbm utilities"
+        echo "       Install netpbm with your package manager"
         exit $EXIT_SIGNAL_RECEIVED
     fi
 }
