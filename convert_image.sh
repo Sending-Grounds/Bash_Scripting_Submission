@@ -30,6 +30,8 @@ EXIT_SIGNAL_RECEIVED=2
 # Print help/usage
 usage() {
 cat<<EOF
+
+Converts image grafics format
 Usage: $0 [-S] [-s N] [-w N] [-c S] imagefile...
 
 Options:
@@ -41,6 +43,15 @@ Options:
 EOF
 }
 
+setup() {
+    type pnmnlfilt
+    if [ -z "$?" ]; then
+        echo "Script is dependent on netpbmi utilities"
+        echo "Install it with your package manager"
+        exit $EXIT_SIGNAL_RECEIVED
+    fi
+}
+
 handle_signals() {
     echo "Recieved signal - Exiting gracefully..."
     exit $EXIT_SIGNAL_RECEIVED
@@ -48,6 +59,10 @@ handle_signals() {
 
 # Main function serving as entrypoint
 main() {
+   # check if netpbm package is present on the system
+   # it is necessary for the script to work
+    setup
+
     # Trap signals
     trap 'handle_signals' SIGINT SIGTERM
 
@@ -85,7 +100,7 @@ main() {
 
     # Check at least one image is provided
     if [ -z "$@" ]; then
-        echo "Error: at least one image must be provided."
+        echo "Error: At least one image must be provided."
         usage
         exit $EXIT_INVALID_ARGS
     fi
@@ -112,7 +127,7 @@ main() {
 
         outfile=${filename%.*}.new.jpg
 
-        eval $convert $filename $scale $border $sharpness $standardise > $outfile
+        eval ${convert} ${filename} ${scale} ${border} ${sharpness} ${standardise} > ${outfile}
 
     done
 }
