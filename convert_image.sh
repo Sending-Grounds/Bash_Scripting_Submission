@@ -44,7 +44,7 @@ EOF
 }
 
 setup() {
-    type pnmnlfilt
+    type pnmnlfilt 1>/dev/null
     if [ -z "$?" ]; then
         echo "Script is dependent on netpbmi utilities"
         echo "Install it with your package manager"
